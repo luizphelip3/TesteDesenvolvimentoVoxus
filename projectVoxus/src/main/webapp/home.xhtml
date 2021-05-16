@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Foram usadas técnicas de JSF para trabalhar nesta solução-->
+<!--Recursos de frontend da ferramenta PrimeFaces também foram utilizados-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="content">
+		<h:form>
+		
+			<p:messages ig="messages">
+			<p:autoUpdate/>
+			</p:messages>
+			
+			<p:card class="card-form">
+			
+			
+				<f:facet name="title">
+        	New Post Page
+    		</f:facet>
+				<f:facet name="subtitle">
+       		Create a new post right here!
+    		</f:facet>
+       		
+					
+					<div class="p-field p-grid">
+						<label for="title" class="p-col-fixed"  style="width:100px">Title *</label>
+						<div class="p-col">						
+						<p:inputText 
+						id="title" 
+						value="#{postBean.post.title}" 
+						required="true"
+						requiredMessage="Title is (*) mandatory!"
+						validatorMessage="Title must have between 5 and 100 characters!">
+						
+						<f:ajax event="blur" render="messages"/>
+						
+						<f:validateLength minimum="5" maximum="100" />
+						</p:inputText>
+						</div>
+					</div>
+					
+					<div class="p-field p-grid">
+						<label for="content" class="p-col-fixed" >Content *</label>
+						<div class="p-col">
+						<p:inputTextarea 
+						id="content" 
+						value="#{postBean.post.content}"
+						required="true"
+						requiredMessage="Content is (*) mandatory!"
+						validatorMessage="Content must have at  least 100 characters!"
+						>
+						<f:ajax event="blur" render="messages"/>
+						<f:validateLength minimum="100"/>
+						</p:inputTextarea>
+						</div>
+					</div>
+					<div class="p-field p-grid">
+						<label for="tag" class="p-col-fixed">Tag</label>
+						<div class="p-col">
+						<p:inputText 
+						id="tag"
+						required="false"
+						value="#{postBean.post.tag}"
+						validatorMessage="Tags must have between 1 and 10 characters!"
+						>
+						<f:validateLength minimum="1" maximum="10" />
+						</p:inputText>
+						</div>
+					</div>				
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Execute" action="#{postBean.save}">
+						<f:ajax execute="@form" render ="messages posts"/>
+					</p:commandButton>
+					<p:commandButton icon="pi pi-times" value="Cancel"
+						styleClass="ui-button-secondary" style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
