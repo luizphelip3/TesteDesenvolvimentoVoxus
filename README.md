@@ -1,3 +1,5 @@
+<h1>INSTRUÇÕES PARA USO</h1>
+
 Ferramentas de desenvolvimento utilizadas e necessárias para funcionamento da solução:
 Eclipse IDE com Perspective Java EE setada;
 JBoss Forge para construção de dependências e libs;
